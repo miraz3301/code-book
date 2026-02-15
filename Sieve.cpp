@@ -10,14 +10,13 @@ int32_t main()
   int n = N - 9;
   vector<int> primes;
   f[1] = true;
-  for (int i = 2; i <= n; i++) 
-  {
-    if (!f[i]) 
+  for (int i = 2; i * i < N; i++) 
     {
-      primes.push_back(i);
-      for (int j = i + i; j <= n; j += i) f[j] = true;
+        if (!f[i]) 
+        {
+            for (int j = i * i; j < N; j += i)f[j] = true;
+        }
     }
-  }
   cout << primes.size() << '\n';
   return 0;
 }
