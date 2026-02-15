@@ -24,3 +24,32 @@ int main()
     }
     cout<<sum;
 }
+
+
+// using sieve
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    const int MAXN = 500000;
+
+    vector<long long> sumDiv(MAXN + 1, 0);
+
+    for(int i = 1; i <= MAXN; i++){
+        for(int j = 2*i; j <= MAXN; j += i){
+            sumDiv[j] += i;
+        }
+    }
+
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        cout << sumDiv[n] << "\n";
+    }
+}
