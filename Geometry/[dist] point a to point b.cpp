@@ -9,7 +9,7 @@ int main()
     cout.tie(nullptr);
 
     long double ax,ay,bx,by;
-    cin>>ax>>ax>>bx>>by;
+    cin>>ax>>ay>>bx>>by;
     long double dis=sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by));
     cout<<fixed<<setprecision(10)<<dis;
     
