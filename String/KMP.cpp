@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 #define ll long long int
+#define endl '\n'
 using namespace std;
 int main()
 {
@@ -7,47 +8,35 @@ int main()
     cin.tie(nullptr);
     cout.tie(nullptr);
     
-    string s,p;
-    cin>>s>>p;
-    vector<ll>lps(p.size(),0);
-    ll pre=0;
-    ll ind=1;
-    while(ind<p.size())
+    string txt,pat;
+    cin>>txt>>pat;
+
+    vector<ll>pi(pat.size(),0);
+    for(ll i=1;i<pat.size();i++)
     {
-        if(p[ind]==p[pre])
-        {
-            pre++;
-            lps[ind]=pre;
-            ind++;
-        }
-        else
-        {
-            if(!pre)
-            {
-                lps[ind]=0;
-                ind++;
-            }
-            else pre=lps[pre-1];
-        }
+        ll j=pi[i-1];
+        while(j>0 and pat[i]!=pat[j])j=pi[j-1];
+        if(pat[i]==pat[j])j++;
+        pi[i]=j;
     }
     ll i=0,j=0;
     vector<ll>v;
-    while(i<s.size())
+    while(i<txt.size())
     {
-        if(s[i]==p[j])
+        if(txt[i]==pat[j])
         {
             i++;
             j++;
-            if(j==p.size())
+            if(j==pat.size())
             {
-                v.push_back(i-p.size());
-                j=lps[j-1];
+                v.push_back(i-pat.size());
+                j=pi[j-1];
             }
         }
         else
         {
             if(!j)i++;
-            else j=lps[j-1];
+            else j=pi[j-1];
         }
     }
     cout<<v.size();
