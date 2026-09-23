@@ -2,44 +2,33 @@
 #define ll long long int
 #define endl '\n'
 using namespace std;
-ll cnt;
-void fun(string &ans,string s,unordered_map<char,bool>&mp,ll k)
+set<string>st;
+void func(string &s,ll n,ll ind)
 {
-    if(cnt==k)return;
-    if(ans.size()==s.size())
+    if(ind==n)
     {
-        cout<<ans<<endl;
-        cnt++;
+        st.insert(s);
         return;
     }
-    for(char c:s)
+    for(ll i=ind;i<n;i++)
     {
-        if(cnt==k)return;
-        if(!mp[c])
-        {
-            ans+=c;
-            mp[c]=true;
-            fun(ans,s,mp,k);
-            mp[c]=false;
-            ans.pop_back();
-        }
+        swap(s[ind],s[i]);
+        func(s,n,ind+1);
+        swap(s[ind],s[i]);
     }
-
 }
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
-    cout.tie(nullptr);
-    
-   
-        ll n,k;
-        cin>>n>>k;
-        string s;
-        for(ll i=0;i<n;i++)s+=('A'+i);
-        unordered_map<char,bool>mp;
-        string ans;
-        cnt=0;
-        fun(ans,s,mp,k);
-    
+ 
+    string s;
+    cin>>s;
+    ll n=s.size();
+    func(s,n,0);
+    cout<<st.size()<<endl;
+    for(auto x:st)
+    {
+        cout<<x<<endl;
+    }
 }
